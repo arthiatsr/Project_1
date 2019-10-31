@@ -4,15 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>JobSearch</title>
     <!-- jQuery Reference-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assets/javascripts/job-search.js" type="text/javascript" ></script>
 
 </head>
 <body>
     
-    <script src="js1.js" type="text/javascript" ></script>
+    
+    <nav>
+        <div class="nav-wrapper cyan" height="480px">
+            
+            <a href="#" class="brand-logo">
+                <i class="material-icons">3d_rotation</i>Job/Src</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a class="btn-floating pulse"><i class="material-icons">menu</i></a>
+                <a class="btn-floating btn-large pulse"><i class="material-icons">cloud</i></a>
+
+            </ul>
+        </div>
+            
+           
+               
+        
+    </nav>
+    <div class= "row cyan">
+            <div class="input-field col s6">
+                <i class= "material-icons prefix">search</i>
+                <input type = "text" id= "role-input" placeholder="Job description">
+            </div>
+            <div class="input-field col s6 center-align">
+                <i class= "material-icons prefix">search</i>
+                <input type = "text" id= "location-input" placeholder="location" width="400px">
+            </div>
+            <div class="row">
+                <a class="waves-effect waves-light btn m6">GitHub</a>
+                <a class="waves-effect waves-light btn">Open Skills</a>
+                <a class="waves-effect waves-light btn">Jooble</a>
+            </div>
+            <div class="row">
+                <a class="waves-effect waves-light btn m6">New Search</a>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col s9">
+            <div class = "card cyan lighten-6" id ="new-search-id">
+                <span class="card-title">Your Search</span>
+            </div>
+        </div>
+        <div class="col s3">
+            <div class = "card cyan lighten-2" id="recent-search-list">
+                <span class="card-title white-text">Previous Search</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer cyan">
+            <div class="container">
+              <div class="row">
+                  <h4>About Us</h4>
+                  <h6>we are a team of three divas - arthi, Hannah, Shweta each of us amzingly worked together to make it done!</h6>
+              </div>
+            </div>
+            <div class="footer-copyright">
+                    <div class="container center-align">
+                    © 2019 Copyright Text
+                    </div>
+            </div>
+    </footer>
 </body>
 </html>
