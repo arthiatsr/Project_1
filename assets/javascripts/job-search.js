@@ -5,6 +5,24 @@ var jobRole = $("#jobRole").val().trim();
 var jobType = $("#jobType").val().trim();
 var jobLocation = $("#jobLocation").val().trim();
 
+$(".btn").on("click",function(e){
+    e.preventDefault();
+    var btnValue= $(this).text();
+    console.log(btnValue);
+
+    if(btnValue ==="GitHub"){
+
+    }
+    else if(btnValue == "open skill")
+    {
+
+    }
+    else if(btnValue == ""){
+        
+    }
+
+});
+
 function jooblesearchAPI(){
     queryURL = "";
 
