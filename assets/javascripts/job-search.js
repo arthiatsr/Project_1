@@ -1,6 +1,5 @@
+console.log("hi");
 $(document).ready(function() {
-
-
 
 $(".btn").on("click",function(e){
     e.preventDefault();
@@ -10,22 +9,44 @@ $(".btn").on("click",function(e){
     var jobLocation = $("#location-input").val().trim();
     console.log(btnValue,jobRole,jobLocation);
     var queryURL="";
+    var searchResultArray = [];
+            
+    // function populateDatabase(){
 
+    //     var jobname;
+    //     var location;
+    //     var description;
+    //     var url;
+               
+        
+    //     database.ref().set({
+    
+    //         name: jobname,
+    //         location: location,
+    //         description: description,
+    //         url:url
+    
+    // });
+    // }
+    
     if(btnValue ==="GitHub"){
-        if(jobRole!==""){
-            if(jobLocation!==""){
-                queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole+"&location="+jobLocation;
+        if((jobRole!=="") && (jobLocation!=="")){
+            queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole+"&location="+jobLocation;
+
+                console.log("i ma in gitHub" + queryURL + jobRole + jobLocation);
                 
-            }
+                //populateDatabase();
+                                
+        } else if((jobLocation=="") && (jobRole!=="")){
 
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole;
-
+            
         }
-        else if(jobLocation!==""){
+        else if((jobLocation!=="") && (jobRole=="")) {
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location="+jobLocation;
 
         }
-        else{
+        else {
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json"
 
         }
@@ -46,9 +67,8 @@ $(".btn").on("click",function(e){
 
         }
     } 
-    console.log(queryURL);
-
-
+    console.log(queryURL);  
+    
     $.ajax({
         url:queryURL,
         method:"GET"
@@ -58,13 +78,48 @@ $(".btn").on("click",function(e){
     .then(function(response){
 
         console.log(response);
+       for(var i = 0; i < response.length; i++){
+        searchResultArray.push({"company" : response[i].company, "location" : response.location, "description" : response[i].description, "url" : response[i].url});
+        
+        
+        console.log(searchResultArray);
+        }
 
     });
     
+//     const firebaseConfig = {
+//         apiKey: "AIzaSyA4eD_m0QUq1FuBqzt7Y1G3B8oMgXU6Zhw",
+//         authDomain: "project2-4152e.firebaseapp.com",
+//         databaseURL: "https://project2-4152e.firebaseio.com",
+//         projectId: "project2-4152e",
+//         storageBucket: "project2-4152e.appspot.com",
+//         messagingSenderId: "606489782220",
+//         appId: "1:606489782220:web:407a7d004079a2c7541f69",
+//         measurementId: "G-STSB19EERQ"
+//       };
+    
+//       firebase.initializeApp(firebaseConfig );
+    
+//       var database = firebase.database();
+
+//       var jobname;
+//       var location;
+//       var description;
+//       var url;
+
+ });
+
+
+
     
 
-});
+    // database.ref().on("value", function(snapshot) {
 
+    //  //   var jobname = response.database.
+
+    // }, function(errorObject) {
+    //     console.log("The read failed: " + errorObject.code);
+    // });
 
 
 // Your web app's Firebase configuration
