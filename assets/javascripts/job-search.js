@@ -1,99 +1,74 @@
 $(document).ready(function() {
 
-var queryURL = "";
-var jobRole = $("#jobRole").val().trim();
-var jobType = $("#jobType").val().trim();
-var jobLocation = $("#jobLocation").val().trim();
+
 
 $(".btn").on("click",function(e){
     e.preventDefault();
     var btnValue= $(this).text();
-    console.log(btnValue);
+    var jobRole = $("#role-input").val().trim();
+
+    var jobLocation = $("#location-input").val().trim();
+    console.log(btnValue,jobRole,jobLocation);
+    var queryURL="";
 
     if(btnValue ==="GitHub"){
+        if(jobRole!==""){
+            if(jobLocation!==""){
+                queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole+"&location="+jobLocation;
+                
+            }
+
+            queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole;
+
+        }
+        else if(jobLocation!==""){
+            queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location="+jobLocation;
+
+        }
+        else{
+            queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json"
+
+        }
 
     }
-    else if(btnValue == "open skill")
-    {
+    else if(btnValue ==="Authentic"){
+        if(jobRole!==""){
+         
+        queryURL = "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=df526b666a30218cb52a00568251e672&method=aj.jobs.search&keywords="+jobRole+"&format=JSON";
+    
+        }
+        else if(jobLocation!==""){
+            queryURL = "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=df526b666a30218cb52a00568251e672&method=aj.jobs.getlocations&keywords="+jobLocation+"&format=JSON";
 
-    }
-    else if(btnValue == ""){
-        
-    }
+        }
+        else{
+            queryURL = "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=df526b666a30218cb52a00568251e672&method=aj.jobs.search&format=JSON"
+
+        }
+    } 
+    console.log(queryURL);
+
+
+    $.ajax({
+        url:queryURL,
+        method:"GET"
+
+
+    })
+    .then(function(response){
+
+        console.log(response);
+
+    });
+    
+    
 
 });
 
-function jooblesearchAPI(){
-    queryURL = "";
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-
-        var result = response.data;
-      });
-
-
-};
-function openskillsearchAPI(){
-    queryURL = "";
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-
-        var result = response.data;
-
-    });
-};
-function githubsearchAPI(){
-    queryURL = "";
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-
-        var result = response.data;
-
-    });
-}
-
-$(".jobsearchAPI").on("click", function() {
-
-    if(dataname="jooble") {
-        indeedsearchAPI();
-
-    }else if(dataname="openskill") {
-        openskillsearchAPI();
-
-    }else if(dataname="github") {
-        githubsearchAPI();
-
-    }
-});
 
 // Your web app's Firebase configuration
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAbwLZoW9or1wG4Jn7lHesJ5kXC8ZDGooo",
-    authDomain: "jobsearch-69d6f.firebaseapp.com",
-    databaseURL: "https://jobsearch-69d6f.firebaseio.com",
-    projectId: "jobsearch-69d6f",
-    storageBucket: "jobsearch-69d6f.appspot.com",
-    messagingSenderId: "889128462674",
-    appId: "1:889128462674:web:834f4203377e955596b28b",
-    measurementId: "G-RMJJ3D382J"
-};
 
-// Initialize Firebase
-
-firebase.initializeApp(firebaseConfig);
-    
-    
-// Create a variable to reference the database.
-var database = firebase.database();
 
 });
