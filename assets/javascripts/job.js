@@ -21,10 +21,7 @@ $(".btn").on("click",function(e){
     console.log(btnValue,jobRole,jobLocation);
     var queryURL="";
     var searchResultArray = [];
-    
-    
-    $('.modal').modal();
-    
+        
     
     if(jobRole!=="" || jobLocation!==""){
         if(btnValue ==="GitHub"){
