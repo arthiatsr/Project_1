@@ -26,22 +26,28 @@ $(".btn").on("click",function(e){
     var jobLocation = $("#location-input").val().trim();
     console.log(btnValue,jobRole,jobLocation);
     var queryURL="";
-
+    var searchResultArray = [];
+            
+    
+    
     if(btnValue ==="GitHub"){
-        if(jobRole!==""){
-            if(jobLocation!==""){
-                queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole+"&location="+jobLocation;
+        if((jobRole!=="") && (jobLocation!=="")){
+            queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole+"&location="+jobLocation;
+
+                console.log("i ma in gitHub" + queryURL + jobRole + jobLocation);
                 
-            }
+                //populateDatabase();
+                                
+        } else if((jobLocation=="") && (jobRole!=="")){
 
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description="+jobRole;
-
+            
         }
-        else if(jobLocation!==""){
+        else if((jobLocation!=="") && (jobRole=="")) {
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location="+jobLocation;
 
         }
-        else{
+        else {
             queryURL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json"
 
         }
@@ -65,10 +71,10 @@ $(".btn").on("click",function(e){
     else if(btnValue ==="Adzuna"){
         if(jobRole!=="" && jobLocation!==""){
 
-            queryURL= "https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=33343f64&app_key=81f0d268dcce1766901ea09e54008698&results_per_page=10&what="+jobRole+"&where="+jobLocation+"&content-type=application/json"
+            queryURL= "https://cors-anywhere.herokuapp.com/https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=33343f64&app_key=81f0d268dcce1766901ea09e54008698&results_per_page=10&what="+jobRole+"&where="+jobLocation+"&content-type=application/json"
         }
         else if (jobRole!=""){
-            "https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=33343f64&app_key=81f0d268dcce1766901ea09e54008698&results_per_page=10&what="+jobRole+"&content-type=application/json"
+            "https://cors-anywhere.herokuapp.com/https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=33343f64&app_key=81f0d268dcce1766901ea09e54008698&results_per_page=10&what="+jobRole+"&content-type=application/json"
         }
 
     }
@@ -137,39 +143,34 @@ $(".btn").on("click",function(e){
             
         }
         else if(btnValue==="Adzuna"){
+            
             for(var i=0; i<10;i++){
+                var title=response.results[i].title.replace(/[</>]/g,"").replace(/strong/g,"")
                 
                 resultArr.push({
 
-                    jobRole:response[keys[i]].title,
-                    jobLocation:response[keys[i]].location,
-                    jobDescriprion:response[keys[i]].description,
-                    Url:response[keys[i]].url,
-                    qUrl:queryURL,
+                    jobRole:title,
+                    jobLocation:response.results[i].location.display_name  || UK,
+                    jobDescriprion:response.results[i].description.replace(/[</>]/g,"").replace(/strong/g,""),
+                    Url:response.results[i].redirect_url,
                     dateAdded:firebase.database.ServerValue.TIMESTAMP,
                     userLocation:jobLocation,
                     userRole:jobRole
     
                 })
             }
+           
             database.ref().push({
                 resultArr:resultArr
     
             })
-
-        }
-        
-        
-
-        
-
-        
+           
+        } 
 
     });
-    
-    
 
-});
+ });
+
 
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
 
@@ -192,10 +193,6 @@ database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added",functio
 }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
 });
-
-
-
-// Your web app's Firebase configuration
 
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
