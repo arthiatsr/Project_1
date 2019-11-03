@@ -8,71 +8,126 @@
     <!-- jQuery Reference-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="assets/javascripts/job-search.js" type="text/javascript" ></script>
 
 </head>
 <body>
-    
-    
-    <nav>
-        <div class="nav-wrapper cyan" height="480px">
-            
-            <a href="#" class="brand-logo">
-                <i class="material-icons">3d_rotation</i>Job/Src</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <a class="btn-floating pulse"><i class="material-icons">menu</i></a>
-                <a class="btn-floating btn-large pulse"><i class="material-icons">cloud</i></a>
-
-            </ul>
-        </div>        
+    <header>
+        <div class="navbar-fixed">
+            <nav class="top-nav">
+                <div class="nav-wrapper white">
+                    
+                    <ul class="right hide-on-small-only" >
+                        <a class="circle dropdown-trigger btn"  data-target='dropdown1'><i class="material-icons">menu</i></a>
+                        <ul id='dropdown1' class='dropdown-content'>
+                                <li><a href="#!">About us</a></li>
+                                <li><a href="#!">Team</a></li>
+                                <li class="divider" tabindex="-1"></li>
+                                <li><a href="#!">Contact Us</a></li>
+                              </ul>
+                        <a class="waves-effect waves-light btn ">LogIn</a>
+                        <a class="waves-effect waves-light btn ">Sign Up</a>
+                        <a class="waves-effect waves-light btn ">Employers/Find Talent</a>
+                    </ul>
+                    <ul id ="slide-out" class="left sidenav">
+                        <li><a href="#!">About us</a></li>
+                        <li><a href="#!">Team</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li><a href="#!">Contact Us</a></li>
+                        <li><a href="#!">LogIn</a></li>
+                        <li><a href="#!">Sign Up</a></li>
+                        <li><a href="#!">Employers/Find Talent</a></li>
+                    </ul>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger btn hide-on-med-and-up"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div id ="banner" class= "parallax-container">
         
-    </nav>
-    <div class= "row cyan">
-            <div class="input-field col s6">
-                <i class= "material-icons prefix">search</i>
-                <input type = "text" id= "role-input" placeholder="Job description">
+        <div class= "section no-pad-bot">
+            <div class="container">
+                <br>
+                <div class="row center">
+                    <img src="assets/images/logo1.png" width="100px" height="100px">
+                    <h5 class="center">We are here to help. Join Us, Get Hired!!</h5>
+                </div>
+                <div class="row center input-field search-input">
+                <i class= "material-icons prefix icon">search</i>
+                        <input type = "text" id= "job-category-input" placeholder="Job description">
+                        
+                        
+                </div>
+                <div class="row center input-field search-input">
+                        <i class="material-icons prefix icon">search</i>
+                        <input type = "text" id= "location-input" placeholder="location" width="400px">
+                        
+                </div>
+                <div class="row center" style ="visibility: visible;">
+                        <a class="waves-effect waves-light btn m6">GitHub</a>
+                        <a class="waves-effect waves-light btn">Authentic</a>
+                        <a class="waves-effect waves-light btn">Adzuna</a>
+                        
+                </div>
+                <br>
             </div>
-            <div class="input-field col s6 center-align">
-                <i class= "material-icons prefix">search</i>
-                <input type = "text" id= "location-input" placeholder="location" width="400px">
-            </div>
-            <div class="row">
-                <a class="waves-effect waves-light btn m6">GitHub</a>
-                <a class="waves-effect waves-light btn">Authentic</a>
-                <a class="waves-effect waves-light btn">Jooble</a>
-            </div>
-            <div class="row">
-                <a class="waves-effect waves-light btn m6">New Search</a>
-            </div>
-    </div>
-    <div class="row">
-        <div class="col s9">
-            <div class = "card cyan lighten-6" id ="new-search-id">
-                <span class="card-title">Your Search</span>
-            </div>
+        </div>    
+        <div class="parallax">
+                <img src ="assets/images/jobSearch.jpg">
         </div>
-        <div class="col s3">
-            <div class = "card cyan lighten-2" id="recent-search-list">
-                <span class="card-title white-text">Previous Search</span>
-            </div>
-        </div>
-    </div>
+    </div>        
+    <div class="container">
+        <div class="section">
+                <div class="row">
+                        
+                    <div class = "card z-depth-1" id ="new-search-id">
+                        <span class="card-title center"></span>
+                    </div>
+                
+                    <ul class ="collapsible z-depth-1" id="recent-search-list">
+                        <li>
+                        <div class="collapsible-header">
+                            <h5>Recent Searches</h5>
+                        </div>    
+                        <div class="collapsible-body">
+                                <div class= "collection" id ="serch-box"></div>
+                        </div>
+                    </li>
+                        
+                    </ul>
+                        
+                </div>
 
-    <footer class="page-footer cyan">
+        </div>
+    </div>
+    
+    <meta http-equiv="Content-Type" content="text/html ; charset=UTF-8">
+    <style>
+        body{
+            display:flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        main{
+            flex:1 0 auto;
+        }
+    </style>
+    <footer class="page-footer">
             <div class="container">
               <div class="row">
-                  <h4>About Us</h4>
-                  <h6>we are a team of three divas - arthi, Hannah, Shweta each of us amzingly worked together to make it done!</h6>
+                  <h5>About Us</h5>
+                  <h6>We are here to help to search your dreme job without going to diiferent sites.
+                      We understand  the importance of your time and efforts.</h6>
               </div>
             </div>
-            <div class="footer-copyright">
-                    <div class="container center-align">
+            <div class="footer-copyright center-align">
+                    <div class="container">
                     © 2019 Copyright Text
                     </div>
             </div>
