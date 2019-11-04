@@ -45,6 +45,16 @@ $(document).ready(function() {
         var inputloginText = $("#userName").val();
         console.log("i ma in login");
         e.preventDefault();
+
+        firebase.database().ref('/user/').equalTo(inputloginText).once("value",snapshot => {
+            if (snapshot.exists()){
+              var userData = snapshot.val();
+              $()
+
+              
+            }
+        });
+
         
     });
    
