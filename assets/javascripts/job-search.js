@@ -26,6 +26,7 @@ $(".btn").on("click",function(e){
     var jobLocation = $("#location-input").val().trim();
     console.log(btnValue,jobRole,jobLocation);
     var queryURL="";
+    if(jobRole!=="" || jobLocation!==""){
     var searchResultArray = [];
             
     
@@ -167,37 +168,58 @@ $(".btn").on("click",function(e){
            
         } 
 
-        firebase.database().ref().on('value', function(snapshot) {
+        database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added",function(snapshot) {
             
-            console.log(snapshot.val());
+            $("new-search-id").empty();
+            var keys = Ojbect.keys(snapshot.val)
+            var temp = snapshot.val()[keys[0]];
+
+            if(snapshot.val()){
+                loadSearchResults(temp);
+            }
+
+            else{
+                $("#new-search-id").html("<h3> No data available for the given search!</h3>")
+            }
+
+        }, function(errorObject) {
+            console.log("Errors handled: " +errorObject.code);
+
+
+        });
+
+        function loadSearchResults(temp) {
+            var elementArr=temp[i];
+            var location = elementArr.jobLocation;
+            var role = elementArr.jobRole;
+            var description = elementArr.jobDescriprion;
+            var url = elementArr.Url;
+
+            var div = $("<div class= 'card z-depth 1 search-card");
+            var jobLink = $("<a href=#>").attr("class","search-item").text(role);
+            $("<span>").text(" , " + location).appendTo(jobLink);
+            jobLink.appendTo(div);
+
+            if(temp[0].siteChoice == "Adzuna")
+                $("<p>").text(descrition).appendTo(div);
+                else
+                div.append(description);
+             $("<a>").attr("href",url).appendTo(div);
+           div.appendTo("#new-search-id");
+        }
+
+        console.log("done");
         
-            function snapshotToArray(snapshot) {
-                var returnArr = [];
-            
-                snapshot.forEach(function(childSnapshot) {
-                    var item = childSnapshot.val();
-                    item.key = childSnapshot.key;
-            
-                    returnArr.push(item);
-                    console.log(snapshotToArray(snapshot));
+                  
                 });
             
-                return returnArr;
+                //return returnArr;    
                 
             };
-
-  
     });
-
-
-
 
  });
 
-
-    
-  
-});
 
 
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
@@ -226,4 +248,4 @@ $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('.sidenav').sidenav();
 
-});
+
