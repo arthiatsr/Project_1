@@ -7,8 +7,10 @@
     <title>JobSearch</title>
     <!-- jQuery Reference-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+     <!-- Firebase Reference 
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -31,9 +33,10 @@
                                 <li class="divider" tabindex="-1"></li>
                                 <li><a href="#!">Contact Us</a></li>
                               </ul>
-                        <a href="#modal1" class="waves-effect waves-light btn modal-trigger">LogIn</a>
+                        <a href="#modal1" class="modalbut waves-effect waves-light btn modal-trigger">LogIn</a>
                         <div class = "modal" id="modal1">
-                            <div class="modal-content">
+                            <div class="modal-content grey darken-2">
+                                <h5 class="center">Login</h5>
                                 <div class="input-field">
                                     <input type="text" id="userName">
                                     <label for="userName">User Name</label>
@@ -43,12 +46,40 @@
                                     <label for="PassWord">Pass Word</label>
                                 </div>
                             </div>
-
+                        
                             <div class="modal-footer">
-                                <a href="" class="btn modal-action modal-close">Login</a>
+                         <!--   <i class= "material-icons prefix icon">account_circle</i>-->
+                                <a id = "LoginCheck" href="" class="btn-login btn modal-action modal-close">Login</a>
                             </div>
                         </div>
-                        <a class="waves-effect waves-light btn ">Sign Up</a>
+                  
+                <!--        <a class="waves-effect waves-light btn ">Sign Up</a> -->
+
+                        <a href="#modal2" class="modalbut waves-effect waves-light btn modal-trigger">SignUp</a>
+                        <div class = "modal" id="modal2">
+                            <div class="modal-content grey darken-2">
+                                <h5 class="center">SignUp</h5>
+                                <div class="input-field">
+                                    <input type="text" id="signupuserName" value="">
+                                    <label for="signupuserName">User Name</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" id="signupPassWord" value="">
+                                    <label for="signupPassWord">Pass Word</label>
+                                </div>
+                                <div class="input-field">
+                                        <input type="text" id="PassWord1">
+                                        <label for="PassWord">Retype Pass Word</label>
+                                    </div>
+                            </div>
+                        
+                            <div class="modal-footer">
+                         <!--   <i class= "material-icons prefix icon">account_circle</i> modal-close-->
+                                <a id = "SignupCheck" href="" class="btn-signup btn modal-action modal-close">SignUp</a>
+                            </div>
+                        </div>
+
+                        
                         <a class="waves-effect waves-light btn ">Employers/Find Talent</a>
                     </ul>
                     <ul id ="slide-out" class="left sidenav">
