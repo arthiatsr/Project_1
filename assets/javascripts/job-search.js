@@ -167,9 +167,37 @@ $(".btn").on("click",function(e){
            
         } 
 
+        firebase.database().ref().on('value', function(snapshot) {
+            
+            console.log(snapshot.val());
+        
+            function snapshotToArray(snapshot) {
+                var returnArr = [];
+            
+                snapshot.forEach(function(childSnapshot) {
+                    var item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+            
+                    returnArr.push(item);
+                    console.log(snapshotToArray(snapshot));
+                });
+            
+                return returnArr;
+                
+            };
+
+  
     });
 
+
+
+
  });
+
+
+    
+  
+});
 
 
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
