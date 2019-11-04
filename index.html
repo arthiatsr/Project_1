@@ -8,7 +8,7 @@
     <!-- jQuery Reference-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -70,9 +70,9 @@
                         
                 </div>
                 <div class="row center" style ="visibility: visible;">
-                        <a class="waves-effect waves-light btn m6">GitHub</a>
-                        <a class="waves-effect waves-light btn">Authentic</a>
-                        <a class="waves-effect waves-light btn">Adzuna</a>
+                        <a class="waves-effect waves-light btn btn-src m6">GitHub</a>
+                        <a class="waves-effect waves-light btn btn-src">Authentic</a>
+                        <a class="waves-effect waves-light btn btn-src">Adzuna</a>
                         
                 </div>
                 <br>
@@ -85,15 +85,16 @@
         <div class="section">
                 <div class="row">
                         
-                    <div class = "card z-depth-1" id ="new-search-id">
-                        <span class="card-title center"></span>
+                    <div id ="new-search-id" class="z-depth-1">
                     </div>
                 
                     <ul class ="collapsible z-depth-1" id="recent-search-list">
                         <li>
+                         
                         <div class="collapsible-header">
-                            <h5>Recent Searches</h5>
-                        </div>    
+                            <h5>Recent Searches<i class="material-icons prefix">arrow_drop_down</i></h5>
+                            
+                        </div> 
                         <div class="collapsible-body">
                                 <div class= "collection" id ="serch-box"></div>
                         </div>

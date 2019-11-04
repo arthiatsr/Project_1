@@ -14,7 +14,7 @@ body{
     text-align: center;
 }
 #job-category-input,#location-input{
-    width:440px;
+    max-width:440px;
     color :white;
 }
 .parallax{
@@ -64,10 +64,34 @@ footer,.btn{
 .dropdown-content{
     width:150px !important
 }
+.search-item{
+    font-size: 20px;
+    text-decoration-line: underline ;
+    color: rgb(93,93,93)
+
+}
+.search-card{
+    padding: 20px;
+    margin: 0;
+}
+span{
+    text-decoration: none ;
+    display: inline-block;
+}
+#new-search-id{
+    min-height: 300px;
+    background:white ;
+}
 
 @media screen and (min-width: 601px){
     .hide-on-med-and-up {
     display: none !important;
     visibility: hidden !important
+    }
+}
+@media screen and (max-width: 601px){
+    .icon{
+    display: none !important;
+    
     }
 }
