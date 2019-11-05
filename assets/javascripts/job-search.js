@@ -21,6 +21,16 @@ var modalbutValue;
 
 $(document).ready(function() {
 
+    database.ref("/search/").orderByChild("dateAdded").limitToLast(1).once("value").then(   function(snapshot){
+        if(snapshot.val()==null){
+            $("#serch-box").html("<h5>No recent search is available</h5>");
+        }
+    },function(e){
+
+
+    });
+
+
     $(".modalbut").on("click",function(e){
         e.preventDefault();
         modalbutValue = $(this).text();
@@ -245,12 +255,10 @@ $('.scrollspy').scrollSpy();
 });
 database.ref("/search/").orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
 
-    
-    var keys = Object.keys(snapshot.val());
     console.log(snapshot.val());
     if(snapshot.val()){
        
-        
+        var keys = Object.keys(snapshot.val());
         var temp = snapshot.val()[keys[1]];
         
         var location = temp[0].userLocation;
@@ -292,11 +300,27 @@ database.ref("/search/").orderByChild("dateAdded").limitToLast(5).on("child_adde
             }
             else{
                 console.log("Nothing changes");
-                //TODO
+                var index= keysOfArray.indexOf(key);
+                console.log(index)
+                listArr.splice(index,1);
+                listArr.push(obj);
+                console.log(listArr);
+                $("#serch-box").empty();
+                for(var j=0;j<listArr.length;j++){
+                    
+                    var temVar = Object.keys(listArr[j]);
+                    console.log(temVar[0]);
+                    var spanLink = $("<span class='new badge' data-badge-caption='results'>");
+                    spanLink.text(temp.length);
+                    var jobLink = $("<a href=#>").attr("class","collection-item").text(temVar[0])
+                    spanLink.appendTo(jobLink);
+                    jobLink.append("<br>").prependTo("#serch-box");
+                }  
+                    
             }
         }
         else if(listArr.length==0){
-            
+            $("#serch-box").empty();
             listArr.push(obj);
             var spanLink = $("<span class='new badge' data-badge-caption='results'>");
             spanLink.text(temp.length);
@@ -306,6 +330,9 @@ database.ref("/search/").orderByChild("dateAdded").limitToLast(5).on("child_adde
         }
         
         
+    }
+    else{
+        console.log("empty research")
     }
 
     
