@@ -1,12 +1,12 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyBnT1oVWCc5ysTxx6GpM4WLUjr2WuUCkrU",
-    authDomain: "userdatabase-b16b1.firebaseapp.com",
-    databaseURL: "https://userdatabase-b16b1.firebaseio.com",
-    projectId: "userdatabase-b16b1",
-    storageBucket: "userdatabase-b16b1.appspot.com",
-    messagingSenderId: "284486144560",
-    appId: "1:284486144560:web:80047d797528af010893f5",
-    measurementId: "G-V36SRZYQWP"
+    apiKey: "AIzaSyDszSEFfAInsMpPqe4PhgYYTrs2AOR8AsM",
+    authDomain: "project-1-job-src.firebaseapp.com",
+    databaseURL: "https://project-1-job-src.firebaseio.com",
+    projectId: "project-1-job-src",
+    storageBucket: "project-1-job-src.appspot.com",
+    messagingSenderId: "1753867064",
+    appId: "1:1753867064:web:ecbdeb2a2106075407d7cd",
+    measurementId: "G-NE3FQV23HM"
   };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -123,8 +123,7 @@ $(".btn-src").on("click",function(e){
                                     jobRole:data[keys[i]].title,
                                     jobLocation:data[keys[i]].location || "US",
                                     jobDescriprion:data[keys[i]].description,
-                                    Url:data[keys[i]].url,
-                                    dateAdded:firebase.database.ServerValue.TIMESTAMP,
+                                    Url:data[keys[i]].url, 
                                     userLocation:jobLocation,
                                     userRole:jobRole,
                                     siteChoice:btnValue
@@ -132,7 +131,8 @@ $(".btn-src").on("click",function(e){
                                 })
                             }
                             database.ref("/search/").push({
-                                resultArr:resultArr
+                                resultArr:resultArr,
+                                dateAdded:firebase.database.ServerValue.TIMESTAMP,
                     
                             });
                         }
@@ -156,8 +156,7 @@ $(".btn-src").on("click",function(e){
                                 jobRole:response[keys[i]].title,
                                 jobLocation:response[keys[i]].location||jobLocation,
                                 jobDescriprion:response[keys[i]].description,
-                                Url:response[keys[i]].url,
-                                dateAdded:firebase.database.ServerValue.TIMESTAMP,
+                                Url:response[keys[i]].url,                                
                                 userLocation:jobLocation,
                                 userRole:jobRole,
                                 siteChoice:btnValue
@@ -165,7 +164,8 @@ $(".btn-src").on("click",function(e){
                             })
                         }
                         database.ref("/search/").push({
-                            resultArr:resultArr
+                            resultArr:resultArr,
+                            dateAdded:firebase.database.ServerValue.TIMESTAMP,
                 
                         })
                     }
@@ -188,7 +188,6 @@ $(".btn-src").on("click",function(e){
                                 jobLocation:response.results[i].location.display_name  || UK,
                                 jobDescriprion:response.results[i].description.replace(/[</>]/g,"").replace(/strong/g,""),
                                 Url:response.results[i].redirect_url,
-                                dateAdded:firebase.database.ServerValue.TIMESTAMP,
                                 userLocation:jobLocation,
                                 userRole:jobRole,
                                 siteChoice:btnValue
@@ -197,7 +196,8 @@ $(".btn-src").on("click",function(e){
                         }
                     
                         database.ref("/search/").push({
-                            resultArr:resultArr
+                            resultArr:resultArr,
+                            dateAdded:firebase.database.ServerValue.TIMESTAMP,
                 
                         })
                 }
@@ -216,86 +216,14 @@ $(".btn-src").on("click",function(e){
  });
 
 
-database.ref("/search/").orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
 
-    
-    var keys = Object.keys(snapshot.val());
-    console.log(snapshot.val());
-    if(snapshot.val()){
-       
-        var temp=snapshot.val()[keys[0]];
-        
-        var location = temp[0].userLocation;
-        var role = temp[0].userRole;
-        var site = temp[0].siteChoice;
-        var key=(role+location+site);
-        
-        var obj ={};
-        obj[key]=temp;
-        var keys=[];
-        if(listArr.length>0){
-            for (var i=0;i<listArr.length;i++){
-                var temVar =Object.keys(listArr[i]);
-                keys.push(temVar[0])
-            }
-            if(!keys.includes(key)){
-                
-                listArr.push(obj);
-                var spanLink = $("<span class='new badge' data-badge-caption='results'>");
-                spanLink.text(temp.length);
-                var jobLink = $("<a href=#>").attr("class","collection-item").text(role+" - "+location+" - "+site)
-                spanLink.appendTo(jobLink);
-                jobLink.append("<br>").prependTo("#serch-box");  
-            }
-            else{
-                console.log("here");
-                //TODO
-            }
-        }
-        else{
-            
-            listArr.push(obj);
-            var spanLink = $("<span class='new badge' data-badge-caption='results'>");
-            spanLink.text(temp.length);
-            var jobLink = $("<a href=#>").attr("class","collection-item").text(role+" - "+location+" - "+site)
-            spanLink.appendTo(jobLink);
-            jobLink.append("<br>").prependTo("#serch-box");
-           
-             
-        }
-        
-    }
-    
-
-}, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
-});
-
-database.ref("/search/").orderByChild("dateAdded").limitToLast(1).on("child_added",function(snapshot){
-
-    $("#new-search-id").empty();
-    var keys = Object.keys(snapshot.val());
-    
-    var temp=snapshot.val()[keys[0]];
-    
-    
-    if(snapshot.val()){
-
-        loadSearchResults(temp);
-       
-    }
-    
-    
-
-}, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
-});
 
 
 $("#serch-box").on("click",'a',function(e){
     
     var val = $(this).text();
-    var str = val.replace(/\d+/g,"").replace(/-/g,"").replace(/\s/g,"");
+    console.log(val);
+    var str = val.replace(/\d+/g,"");
     
     for (var i = 0; i < listArr.length; i++) {
         var keys = Object.keys(listArr[i]) 
@@ -312,7 +240,96 @@ $("#serch-box").on("click",'a',function(e){
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('.sidenav').sidenav();
+$('.scrollspy').scrollSpy();
 
+});
+database.ref("/search/").orderByChild("dateAdded").limitToLast(5).on("child_added",function(snapshot){
+
+    
+    var keys = Object.keys(snapshot.val());
+    console.log(snapshot.val());
+    if(snapshot.val()){
+       
+        
+        var temp = snapshot.val()[keys[1]];
+        
+        var location = temp[0].userLocation;
+        var role = temp[0].userRole;
+        var site = temp[0].siteChoice;
+
+
+        var key=(role+" - "+location+" - "+site);
+       
+        var obj ={};
+        obj[key]=temp;
+        var keysOfArray=[];
+        console.log(listArr);
+        if(listArr.length>0){
+            
+            for (var i=0;i<listArr.length;i++){
+                var temVar =Object.keys(listArr[i]);
+                keysOfArray.push(temVar[0])
+            }
+            if(!keysOfArray.includes(key)){
+               
+                listArr.push(obj);
+                if(listArr.length>5)
+                {
+                    listArr.shift();
+                }
+                
+                $("#serch-box").empty();
+                for(var j=0;j<listArr.length;j++){
+                    
+                    var temVar = Object.keys(listArr[j]);
+                    console.log(temVar[0]);
+                    var spanLink = $("<span class='new badge' data-badge-caption='results'>");
+                    spanLink.text(temp.length);
+                    var jobLink = $("<a href=#>").attr("class","collection-item").text(temVar[0])
+                    spanLink.appendTo(jobLink);
+                    jobLink.append("<br>").prependTo("#serch-box");
+                }  
+            }
+            else{
+                console.log("Nothing changes");
+                //TODO
+            }
+        }
+        else if(listArr.length==0){
+            
+            listArr.push(obj);
+            var spanLink = $("<span class='new badge' data-badge-caption='results'>");
+            spanLink.text(temp.length);
+            var jobLink = $("<a href=#>").attr("class","collection-item").text(role+" - "+location+" - "+site)
+            spanLink.appendTo(jobLink);
+            jobLink.append("<br>").prependTo("#serch-box");   
+        }
+        
+        
+    }
+
+    
+
+}, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+});
+
+database.ref("/search/").orderByChild("dateAdded").limitToLast(1).on("child_added",function(snapshot){
+
+    $("#new-search-id").empty();
+    var keys = Object.keys(snapshot.val());
+    
+    var temp=snapshot.val()[keys[1]];
+    if(snapshot.val()){
+
+        loadSearchResults(temp);
+       
+    }
+    
+    
+
+}, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
 });
 
 function loadSearchResults(temp) {
