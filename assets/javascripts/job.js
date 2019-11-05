@@ -169,3 +169,9 @@ $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('.sidenav').sidenav();
 });
+
+//    $("#menuwrapper").append('<i class= "material-icons prefix icon">account_circle</i>' + '<p id="pName">' + inputloginText + '</p>');
+
+            //var a=$("<a href=#>").text(inputloginText);
+
+            //$("#appendlogin").prepend(a);

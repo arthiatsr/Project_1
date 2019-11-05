@@ -41,23 +41,30 @@ $(document).ready(function() {
     });
 
     $(".btn-login").on("click",function(e){
-
-        var inputloginText = $("#userName").val();
-        console.log("i ma in login");
         e.preventDefault();
-
-        firebase.database().ref('/user/').equalTo(inputloginText).once("value",snapshot => {
-            if (snapshot.exists()){
-              var userData = snapshot.val();
-              $()
-
-              
-            }
-        });
-
+        var inputloginText = $("#userName").val().trim();;
+        console.log("i ma in login" + inputloginText);
         
-    });
-   
+
+            firebase.database().ref('/user/').limitToFirst(1).on("value",function(snapshot) {
+         
+            console.log("i am clicked login");
+            
+            console.log(snapshot.val());
+            if (snapshot.val()){
+                
+                $("#loginWrapper").remove();   
+
+            
+            
+            $("#appendlogin").append('<a class="circle dropdown-trigger btn right" style="margin:15px;color:grey" href="#" data-target="dropdown2">' + inputloginText + '<i class= "material-icons prefix icon right" style="color:grey">account_circle</i></a><ul id="dropdown2" class="dropdown-content"><li><a href="#">Upload Resume</a></li></ul>');
+            }   
+            $('.dropdown-trigger').dropdown();
+                             
+           
+       });        
+        
+    });   
 $(".btn-src").on("click",function(e){
     e.preventDefault();
     var btnValue= $(this).text();

@@ -23,19 +23,23 @@
     <header>
         <div class="navbar-fixed">
             <nav class="top-nav">
-                <div class="nav-wrapper white">
+                <div  class="nav-wrapper white">
                     
                     <ul class="right hide-on-small-only" >
-                        <a class="circle dropdown-trigger btn"  data-target='dropdown1'><i class="material-icons">menu</i></a>
-                        <ul id='dropdown1' class='dropdown-content'>
+                        
+                            <a  class="circle dropdown-trigger btn"  data-target='dropdown1'><i class="material-icons">menu</i></a>
+                            <ul id='dropdown1' class='dropdown-content'>
                                 <li><a href="#!">About us</a></li>
                                 <li><a href="#!">Team</a></li>
                                 <li class="divider" tabindex="-1"></li>
                                 <li><a href="#!">Contact Us</a></li>
                               </ul>
-                        <a href="#modal1" class="modalbut waves-effect waves-light btn modal-trigger">LogIn</a>
-                        <div class = "modal" id="modal1">
-                            <div class="modal-content grey darken-2">
+                            
+                              <div id="loginWrapper">
+                                <a id = "Logindisappear" href="#modal1" class="modalbut waves-effect waves-light btn modal-trigger">LogIn</a>
+                              </div>
+                                <div class = "modal" id="modal1">
+                                <div class="modal-content grey darken-2">
                                 <h5 class="center">Login</h5>
                                 <div class="input-field">
                                     <input type="text" id="userName">
@@ -45,6 +49,7 @@
                                     <input type="text" id="PassWord">
                                     <label for="PassWord">Pass Word</label>
                                 </div>
+                                
                             </div>
                         
                             <div class="modal-footer">
@@ -91,7 +96,10 @@
                         <li><a href="#!">Sign Up</a></li>
                         <li><a href="#!">Employers/Find Talent</a></li>
                     </ul>
+                    <div id = "appendlogin">
                     <a href="#" data-target="slide-out" class="sidenav-trigger btn hide-on-med-and-up"><i class="material-icons">menu</i></a>
+
+                    </div>
                 </div>
             </nav>
         </div>
