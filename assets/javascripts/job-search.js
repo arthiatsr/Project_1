@@ -61,8 +61,8 @@ $(document).ready(function() {
 $(".btn-src").on("click",function(e){
     e.preventDefault();
     var btnValue= $(this).text();
-    var jobRole = $("#job-category-input").val().trim();
-    var jobLocation = $("#location-input").val().trim();
+    var jobRole = $("#job-category-input").val().trim().toLowerCase();
+    var jobLocation = $("#location-input").val().trim().toLowerCase();
     var queryURL="";
         
     
